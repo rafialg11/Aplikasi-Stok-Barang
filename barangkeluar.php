@@ -110,19 +110,30 @@ require 'cek.php';
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data</h4>
+                    <h4 class="modal-title">Tambah Barang Keluar</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <!-- Modal body -->
                     <form method="post">
                     <div class="modal-body">
-                        <input type="text" name="namabarang" placeholder="Nama Barang" class="form-control">
+                    <select name="pilihbarangnya" class="form-control">
+                        <?php
+                            $ambilsemuadata=mysqli_query($conn, "select * from stock");
+                            while ($fetcharray=mysqli_fetch_array($ambilsemuadata)) {
+                                $namabarangselect=$fetcharray['namabarang'];
+                                $idbarangselect=$fetcharray['idbarang'];
+                        ?>
+                        <option value="<?=$idbarangselect;?>"><?=$namabarangselect;?></option>
+                        <?php        
+                            } 
+                        ?>
+                        </select>
                         <br>
-                        <input type="text" name="deskripsi" placeholder="Deskripsi Barang" class="form-control">
+                        <input type="text" name="penerima" placeholder="Penerima" class="form-control">
                         <br>
-                        <input type="number" name="jumlah" placeholder="Jumlah" class="form-control">
+                        <input type="number" name="qty" placeholder="Quantity" class="form-control">
                         <br>    
-                        <button type="submit" class="btn btn-primary" name="tambahbarang">Submit</button>
+                        <button type="submit" class="btn btn-primary" name="barangkeluar">Submit</button>
                     </div>
                     </form>                   
                 </div>

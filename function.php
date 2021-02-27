@@ -39,4 +39,27 @@ if (isset($_POST['barangmasuk'])) {
         header('location:barangmasuk.php');
     }
 }
+
+
+//menambah barang keluar
+if (isset($_POST['barangkeluar'])) {
+    $pilihbaranngnya=$_POST['pilihbarangnya'];
+    $penerima=$_POST['penerima'];
+    $qty=$_POST['qty'];
+
+    $cekstoksekarang=mysqli_query($conn, "select * from stock where idbarang='$pilihbaranngnya'");
+    $ambildata=mysqli_fetch_array($cekstoksekarang);
+
+    $stoksekarang=$ambildata['jumlah'];
+    $totalsetelahdikurang=$stoksekarang-$qty;
+
+    $addtokeluar=mysqli_query($conn, "insert into keluar (idbarang, penerima, qty) values('$pilihbaranngnya','$penerima','$qty')");
+    $updatestokkeluar=mysqli_query($conn, "update stock set jumlah='$totalsetelahdikurang' where idbarang='$pilihbaranngnya'");
+    if ($addtokeluar&&$updatestokkeluar) {
+        header('location:barangkeluar.php');
+    }else {
+        echo 'Gagal';
+        header('location:barangkeluar.php');
+    }
+}
 ?>
