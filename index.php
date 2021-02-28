@@ -76,12 +76,27 @@ require 'cek.php';
                                         </thead>
                                         
                                         <tbody>
+                                            <?php
+                                            $tampildatastok=mysqli_query($conn, "select * from stock");
+                                            $i=1;
+                                            while ($data=mysqli_fetch_array($tampildatastok)) {
+                                                $namabarang =$data['namabarang'];
+                                                $deskripsi =$data['deskripsi'];
+                                                $jumlah =$data['jumlah'];
+                                            ?>
                                             <tr>
-                                                <td>Donna Snider</td>
-                                                <td>Customer Support</td>
-                                                <td>New York</td>
-                                                <td>New York</td>
+                                                <td><?php
+                                                    echo $i;
+                                                    $i++;
+                                                    ?>
+                                                    </td>
+                                                <td><?=$namabarang;?></td>
+                                                <td><?=$deskripsi;?></td>
+                                                <td><?=$jumlah;?></td>
                                             </tr>
+                                            <?php
+                                                };
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
