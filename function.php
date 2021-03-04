@@ -62,4 +62,34 @@ if (isset($_POST['barangkeluar'])) {
         header('location:barangkeluar.php');
     }
 }
+
+//edit detail barang
+if (isset($_POST['updatebarang'])) {
+    $idb= $_POST['idb'];
+    $namabarang= $_POST['namabarang'];
+    $deskripsi= $_POST['deskripsi'];
+
+    $editdetail= mysqli_query($conn, "update stock set namabarang='$namabarang', deskripsi='$deskripsi' where idbarang='$idb'");
+    if ($editdetail) {
+        header('location:index.php');
+    }else {
+        echo 'Gagal';
+        header('location:index.php');
+    }
+}
+
+//hapus barang
+if (isset($_POST['hapusbarang'])) {
+    $idb= $_POST['idb'];
+    
+    $hapusbarang= mysqli_query($conn, "delete from stock where idbarang='$idb'");
+    if ($hapusbarang) {
+        header('location:index.php');
+    }else {
+        echo 'Gagal';
+        header('location:index.php');
+    }
+}
+
+
 ?>
